@@ -3,6 +3,7 @@
     <persistence-unit name="persistence-test" transaction-type="RESOURCE_LOCAL">
 
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.comcast.cable.hibernate.examples.versioning.model.Friend</class>
 		<class>com.comcast.cable.hibernate.examples.versioning.model.User</class>
 
 		<properties>

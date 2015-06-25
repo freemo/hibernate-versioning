@@ -1,6 +1,11 @@
 package com.comcast.cable.hibernate.examples.versioning.model;
 
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -20,6 +25,19 @@ public class User implements Serializable {
 	@Version
 	@Column(name = "version", nullable = false)
 	private long version;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @JoinTable(name = "USERFRIEND", joinColumns = @JoinColumn(name="user_id", nullable = false))
+    @BatchSize(size = 50)
+    private List<Friend> friends;
+
+    public List<Friend> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<Friend> friends) {
+        this.friends = friends;
+    }
 
 	public long getVersion() {
 		return version;
